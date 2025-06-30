@@ -17,8 +17,6 @@ We take the security of OpenCopilot seriously. If you believe you have found a s
 
 **Please do NOT report security vulnerabilities through public GitHub issues.**
 
-Instead, please email us at: [security@yourorganization.com] (replace with actual security email)
-
 ### What to Include
 
 Please include the following information in your report:
