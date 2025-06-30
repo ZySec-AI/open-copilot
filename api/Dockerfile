@@ -1,6 +1,6 @@
 # Multi-stage build for optimized Python FastAPI application using uv
 # Stage 1: Build dependencies and virtual environment
-FROM python:3.11-slim AS builder
+FROM python:3.13-slim AS builder
 
 # Set environment variables for optimization
 ENV PYTHONUNBUFFERED=1 \
@@ -33,7 +33,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install -r requirements.txt
 
 # Stage 2: Runtime image
-FROM python:3.11-slim AS runtime
+FROM python:3.13-slim AS runtime
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
