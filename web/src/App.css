@@ -1,0 +1,172 @@
+@import url("@radix-ui/colors/tomato-dark.css");
+@import url("@radix-ui/colors/mauve-dark.css");
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 4px;
+    background: #fff;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #f2f2f2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #f2f2f2;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    background: #f2f2f2;
+    border-radius: 10px;
+}
+.editor-container {
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    width: 90vw;
+}
+/* ======================new css======================= */
+.main-container {
+    max-width: 1800px;
+    width: 100%;
+    margin: 0 auto;
+}
+.sm-container {
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.color-wrap {
+    width: 12px;
+}
+
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 10px !important;
+}
+.commanbtn {
+    background-color: #0d60d8;
+    border: 1px solid #0d60d8;
+    display: flex;
+}
+.commanbtn:hover {
+    background-color: #fff;
+    color: #0d60d8;
+}
+th {
+    background-color: #f0f7ff;
+}
+tr:nth-child(even) {
+    background-color: #f3f4f6;
+}
+.css-2s5oh9-MuiGrid-root {
+    max-width: 40% !important;
+    flex-basis: 40% !important;
+}
+.plusIcon {
+    background-color: transparent !important;
+    padding: 0;
+    color: #5d5fef !important;
+    border: none !important;
+    min-width: auto !important;
+    height: auto !important;
+}
+
+.filePlusIcon {
+    position: absolute !important;
+    right: -20px;
+}
+
+.css-cveggr-MuiListItemIcon-root {
+    min-width: 30px !important;
+}
+/* notificationListing css */
+.notificationListing {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.notificationListing li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    display: flex;
+    align-items: self-start;
+}
+.alertIcon {
+    width: 15px;
+    color: orange;
+    margin-right: 3px;
+}
+.notivalue {
+    width: calc(100% - 24px);
+}
+.notRead {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    background-color: #0d60d8;
+    border-radius: 50%;
+    position: absolute;
+    right: 6px;
+    top: 20px;
+}
+
+/* chat screen */
+.chatHostoryList ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.chatHostoryList ul li a {
+    width: calc(100% - 25px);
+}
+.chatHostoryList ul li span {
+    width: 20px;
+}
+button {
+    font-size: 16px !important;
+}
+.customPopupClass {
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+/* media query */
+@media (max-width: 900px) {
+    .librarySidebar {
+        display: none;
+    }
+    .mainContent {
+        width: 100% !important;
+        padding: 20px;
+    }
+    /* login page */
+    .loginMainWrap:before {
+        top: 30px;
+        left: 50%;
+        transform: translateX(-15%);
+        background-size: contain !important;
+        background-repeat: no-repeat;
+    }
+    .loginWrapper {
+        left: 0;
+        right: 0;
+        width: 91% !important;
+        margin: 0 auto !important;
+    }
+}
+
+.css-bshv44-MuiButtonBase-root-MuiListItem-root {
+    border-bottom: 1px solid #ccc !important;
+}

@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  mongo-srv:
+    image: mongo:latest
+    container_name: mongo-srv
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - ./workspace/mongo-srv/mongo-db:/data/db
+      - ./workspace/mongo-srv/logs:/var/log/mongodb
+
+  opensearch-srv:
+    image: opensearchproject/opensearch:latest
+    container_name: opensearch-srv
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+      - plugins.security.authcz.admin_dn=${OPENSEARCH_USERNAME}
+      - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./workspace/opensearch-srv/indexes:/usr/share/opensearch/data
+      - ./workspace/opensearch-srv/logs:/usr/share/opensearch/logs
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+
+  neo4j-srv:
+    image: neo4j:latest
+    container_name: neo4j-srv
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
+    ports:
+      - "7883:7687"
+      - "7474:7474"
+    volumes:
+      - ./workspace/neo4j-srv/data:/data
+      - ./workspace/neo4j-srv/logs:/logs
+
+  web-srv:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: web-srv
+    ports:
+      - "5471:5471"
+    environment:
+      - PORT=5471
+    volumes:
+      - ./workspace/web-srv/user-files:/app/public
+      - ./workspace/web-srv/logs:/var/log/web
+    depends_on:
+      - api-srv
+
+  api-srv:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api-srv
+    ports:
+      - "8081:8081"
+    environment:
+      - DB_URL=${DB_URL}
+      - DB_NAME=${DB_NAME}
+      - MODE=private
+      - PRIVATE_BASE_URL=${PRIVATE_BASE_URL}
+      - PRIVATE_SECRET_KEY=${PRIVATE_SECRET_KEY}
+      - PRIVATE_MODEL=${PRIVATE_MODEL}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - OPENSEARCH_HOST=${OPENSEARCH_HOST}
+      - OPENSEARCH_PORT=${OPENSEARCH_PORT}
+      - OPENSEARCH_USERNAME=${OPENSEARCH_USERNAME}
+      - OPENSEARCH_PASSWORD=${OPENSEARCH_PASSWORD}
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USERNAME=${NEO4J_USERNAME}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+      - DEFAULT_MODEL=${DEFAULT_MODEL}
+      - K=${K}
+    volumes:
+      - ./workspace/api-srv/logs:/var/log/api
+    depends_on:
+      - mongo-srv
+      - opensearch-srv
+      - neo4j-srv
