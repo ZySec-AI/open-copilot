@@ -83,6 +83,6 @@ wsproto~=1.2.0
 python-dateutil~=2.9.0.post0
 greenlet~=3.0.3
 SQLAlchemy~=1.4.52
-neo4j~=5.22.0
+neo4j~=5.28.1
 langchain-experimental==0.0.62
 jsonpath-python==1.0.6
