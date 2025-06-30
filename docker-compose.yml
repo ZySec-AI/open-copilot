@@ -1,21 +1,21 @@
 version: '3.8'
 
 services:
-  mongo-srv:
+  open-copilot-mongo:
     image: mongo:latest
-    container_name: mongo-srv
+    container_name: open-copilot-mongo
     ports:
       - "27017:27017"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     volumes:
-      - ./workspace/mongo-srv/mongo-db:/data/db
-      - ./workspace/mongo-srv/logs:/var/log/mongodb
+      - ./workspace/open-copilot-mongo/mongo-db:/data/db
+      - ./workspace/open-copilot-mongo/logs:/var/log/mongodb
 
-  opensearch-srv:
+  open-copilot-opensearch:
     image: opensearchproject/opensearch:latest
-    container_name: opensearch-srv
+    container_name: open-copilot-opensearch
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
@@ -28,44 +28,44 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - ./workspace/opensearch-srv/indexes:/usr/share/opensearch/data
-      - ./workspace/opensearch-srv/logs:/usr/share/opensearch/logs
+      - ./workspace/open-copilot-opensearch/indexes:/usr/share/opensearch/data
+      - ./workspace/open-copilot-opensearch/logs:/usr/share/opensearch/logs
     ports:
       - "9200:9200"
       - "9600:9600"
 
-  neo4j-srv:
+  open-copilot-neo4j:
     image: neo4j:latest
-    container_name: neo4j-srv
+    container_name: open-copilot-neo4j
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
     ports:
       - "7883:7687"
       - "7474:7474"
     volumes:
-      - ./workspace/neo4j-srv/data:/data
-      - ./workspace/neo4j-srv/logs:/logs
+      - ./workspace/open-copilot-neo4j/data:/data
+      - ./workspace/open-copilot-neo4j/logs:/logs
 
-  web-srv:
+  open-copilot-web:
     build:
       context: ./web
       dockerfile: Dockerfile
-    container_name: web-srv
+    container_name: open-copilot-web
     ports:
       - "5471:5471"
     environment:
       - PORT=5471
     volumes:
-      - ./workspace/web-srv/user-files:/app/public
-      - ./workspace/web-srv/logs:/var/log/web
+      - ./workspace/open-copilot-web/user-files:/app/public
+      - ./workspace/open-copilot-web/logs:/var/log/web
     depends_on:
-      - api-srv
+      - open-copilot-api
 
-  api-srv:
+  open-copilot-api:
     build:
       context: ./api
       dockerfile: Dockerfile
-    container_name: api-srv
+    container_name: open-copilot-api
     ports:
       - "8081:8081"
     environment:
@@ -88,8 +88,8 @@ services:
       - DEFAULT_MODEL=${DEFAULT_MODEL}
       - K=${K}
     volumes:
-      - ./workspace/api-srv/logs:/var/log/api
+      - ./workspace/open-copilot-api/logs:/var/log/api
     depends_on:
-      - mongo-srv
-      - opensearch-srv
-      - neo4j-srv
+      - open-copilot-mongo
+      - open-copilot-opensearch
+      - open-copilot-neo4j
