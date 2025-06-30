@@ -1,8 +1,127 @@
-# CyberPOD AI
+# OpenCopilot 🚀
 
-## Overview
+[![CI/CD Pipeline](https://github.com/ZySec-AI/open-copilot/actions/workflows/ci.yml/badge.svg)](https://github.com/ZySec-AI/open-copilot/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Contributors](https://img.shields.io/github/contributors/ZySec-AI/open-copilot.svg)](https://github.com/ZySec-AI/open-copilot/graphs/contributors)
+[![Issues](https://img.shields.io/github/issues/ZySec-AI/open-copilot.svg)](https://github.com/ZySec-AI/open-copilot/issues)
+[![Pull Requests](https://img.shields.io/github/issues-pr/ZySec-AI/open-copilot.svg)](https://github.com/ZySec-AI/open-copilot/pulls)
 
-This project is a web application that leverages several technologies including MongoDB, OpenSearch, Neo4j, and a React frontend. The project is set up to run both locally and within Docker containers.
+OpenCopilot is an AI-powered cybersecurity assistant that helps organizations enhance their security posture through intelligent document management, expert knowledge systems, and advanced chat capabilities.
+
+## 🌟 Features
+
+- **AI-Powered Chat**: Intelligent conversations with cybersecurity experts
+- **Document Management**: Advanced search and organization of security documents
+- **Knowledge Graph**: Neo4j-powered relationships and insights
+- **Multi-Database Support**: MongoDB, OpenSearch, and Neo4j integration
+- **Real-time Collaboration**: WebSocket-based live interactions
+- **Modern UI**: React-based responsive interface with Tailwind CSS
+- **Containerized Deployment**: Docker and Docker Compose support
+
+## 📚 Documentation
+
+- **[Getting Started](#getting-started)** - Quick setup guide
+- **[Development Guide](./DEVELOPMENT.md)** - Detailed development instructions
+- **[Architecture Overview](./ARCHITECTURE.md)** - System design and components
+- **[Contributing Guidelines](./CONTRIBUTING.md)** - How to contribute
+- **[Security Policy](./SECURITY.md)** - Security and vulnerability reporting
+- **[Changelog](./CHANGELOG.md)** - Release notes and changes
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- Docker & Docker Compose
+- Node.js 18+ with npm/pnpm
+- Python 3.10+
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ZySec-AI/open-copilot.git
+   cd open-copilot
+   ```
+
+2. **Environment setup**
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+
+3. **Start with Docker (Recommended)**
+   ```bash
+   docker-compose up -d
+   ```
+
+4. **Or run locally for development**
+   ```bash
+   # Start backend services
+   docker-compose up -d mongodb opensearch-srv neo4j
+   
+   # Start backend
+   cd api && pip install -r requirements.txt
+   uvicorn app.main:app --reload --port 8081
+   
+   # Start frontend (new terminal)
+   cd web && npm install && npm start
+   ```
+
+5. **Access the application**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8081
+   - API Documentation: http://localhost:8081/docs
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+### For New Contributors
+
+1. **🍴 Fork the repository** on GitHub
+2. **📥 Clone your fork** locally
+3. **🌿 Create a feature branch** (`git checkout -b feature/amazing-feature`)
+4. **💻 Make your changes** and test them
+5. **📝 Commit your changes** (`git commit -m 'Add amazing feature'`)
+6. **📤 Push to your fork** (`git push origin feature/amazing-feature`)
+7. **🔄 Open a Pull Request**
+
+### Quick Development Setup
+
+```bash
+# Fork and clone the repo
+git clone https://github.com/YOUR_USERNAME/open-copilot.git
+cd open-copilot
+
+# Set up development environment
+./scripts/setup-dev.sh  # (if available)
+
+# Or use VS Code Dev Containers
+# Install "Dev Containers" extension, then:
+# Ctrl+Shift+P -> "Dev Containers: Reopen in Container"
+```
+
+### What Can You Contribute?
+
+- 🐛 **Bug fixes** - Help us squash bugs
+- ✨ **New features** - Add exciting capabilities
+- 📖 **Documentation** - Improve guides and examples
+- 🧪 **Tests** - Increase coverage and reliability
+- 🎨 **UI/UX improvements** - Enhance user experience
+- 🔧 **DevOps** - Improve deployment and CI/CD
+- 🛡️ **Security** - Identify and fix vulnerabilities
+
+### Development Resources
+
+- **[Development Guide](./DEVELOPMENT.md)** - Complete development setup
+- **[Architecture Guide](./ARCHITECTURE.md)** - Understanding the codebase
+- **[API Documentation](http://localhost:8081/docs)** - Backend API reference
+- **[Component Library](./web/src/component/ui/)** - Frontend components
+
+## 📋 Project Overview
 
 ## Prerequisites
 
@@ -199,6 +318,35 @@ For specific services, you can use:
 ```bash
 docker-compose -f deploy/docker-compose.yml logs <service_name>
 ```
+
+## 🤝 Community & Support
+
+### Getting Help
+
+- **📖 Documentation**: Check our comprehensive guides above
+- **🐛 Issues**: [Report bugs or request features](https://github.com/ZySec-AI/open-copilot/issues)
+- **💬 Discussions**: [Join community discussions](https://github.com/ZySec-AI/open-copilot/discussions)
+- **🛡️ Security**: Report security issues to [security@yourorganization.com]
+
+### Code of Conduct
+
+Please read our [Code of Conduct](./.github/CODE_OF_CONDUCT.md) to understand the standards we expect from our community.
+
+### License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](./LICENSE) file for details.
+
+### Acknowledgments
+
+- FastAPI for the excellent Python web framework
+- React community for the amazing frontend ecosystem
+- All our contributors who make this project better
+
+---
+
+**⭐ Star this repository if you find it helpful!**
+
+**🔗 Share it with others who might benefit from an AI-powered cybersecurity assistant**
 
 For example:
 
