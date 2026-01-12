@@ -63,7 +63,7 @@ uvicorn==0.25.0
 gunicorn~=22.0.0
 yarl==1.9.4
 zipp==3.18.1
-apscheduler==3.10.4
+apscheduler==3.11.2
 opensearch-py==2.5.0
 nltk==3.8.1
 langchain-community==0.2.6
