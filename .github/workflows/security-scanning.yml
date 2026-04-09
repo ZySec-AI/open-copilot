@@ -1,0 +1,45 @@
+name: Unified Security Checks
+ 
+on:
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+ 
+jobs:
+  secret-scanning:
+    name: Secret Scanning (TruffleHog)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Run TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: .
+          extra_args: "--only-verified"
+ 
+  sast-bandit:
+    name: SAST (Bandit)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+ 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+ 
+      - name: Install Bandit
+        run: pip install bandit
+ 
+      - name: Run Bandit Scan
+        run: bandit -r . -lll
