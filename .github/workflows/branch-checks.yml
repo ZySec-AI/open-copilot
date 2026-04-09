@@ -1,0 +1,84 @@
+name: Branch Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  pull-requests: read
+  contents: read
+
+jobs:
+  branch-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate branch name against standards
+        run: |
+          BRANCH="${{ github.head_ref }}"
+
+          echo "Branch name: $BRANCH"
+
+          # Allowed patterns:
+          # feature/<desc>, bugfix/<desc>, hotfix/<desc>, task/<desc>, exp/<desc>, chore/<desc>, improve/<desc>
+          # develop
+          # release (standalone) or release/<desc>
+          if [[ ! "$BRANCH" =~ ^(feature|bugfix|hotfix|task|exp|chore|improve)\/[a-z0-9-]+$ \
+                && ! "$BRANCH" =~ ^develop$ \
+                && ! "$BRANCH" =~ ^release(\/[a-z0-9-]+)?$ ]]; then
+
+            echo "❌ Invalid branch name: $BRANCH"
+            echo "Branch names must follow the repository standards:"
+            echo "  - feature/<short-description>"
+            echo "  - bugfix/<short-description>"
+            echo "  - hotfix/<short-description>"
+            echo "  - task/<short-description>"
+            echo "  - exp/<short-description>"
+            echo "  - chore/<short-description>"
+            echo "  - improve/<short-description>"
+            echo "  - develop"
+            echo "  - release"
+            echo "  - release/<short-description>"
+            echo ""
+            echo "Use lowercase letters and hyphens only."
+            exit 1
+          fi
+
+      - name: Check allowed merge flow
+        run: |
+          echo "Source Branch: $SRC"
+          echo "Target Branch: $DST"
+            [[ "$1" != "develop" && "$1" != "release" ]]
+          }
+            echo "✅ Allowed: $SRC → develop"
+          fi
+
+            exit 0
+          fi
+          echo "❌ Invalid merge flow: $SRC → $DST"
+          echo ""
+          echo "  • feature/* → develop"
+          echo "  • bugfix/* → develop"
+          echo "  • task/* → develop"
+          echo "  • chore/* → develop"
+          echo "  • improve/* → develop"
+          echo "  • develop → release"
+          exit 1
+          echo "  • hotfix/* → develop"
+          echo "Allowed flows:"
+
+          # Rule 2: develop -> release
+          if [[ "$SRC" == "develop" && "$DST" == "release" ]]; then
+            echo "✅ Allowed: develop → release"
+            exit 0
+          if is_otherbranch "$SRC" && [[ "$DST" == "develop" ]]; then
+          # Rule 1: any other branch -> develop
+
+          is_otherbranch() {
+
+
+          DST="${{ github.base_ref }}"
+          SRC="${{ github.head_ref }}"
+
+
