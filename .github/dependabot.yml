@@ -12,7 +12,7 @@ updates:
       - "maintainer1"  # Replace with actual maintainer usernames
 
   # Enable version updates for pip (backend)
-    labels: []
+    labels: ["dependencies"]
   - package-ecosystem: "pip"
     directory: "/api"
     schedule:
@@ -24,13 +24,13 @@ updates:
       - "maintainer1"  # Replace with actual maintainer usernames
 
   # Enable version updates for Docker
-    labels: []
+    labels: ["dependencies"]
   - package-ecosystem: "docker"
     directory: "/api"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
-    labels: []
+    labels: ["dependencies"]
 
   - package-ecosystem: "docker"
     directory: "/web"
@@ -39,10 +39,10 @@ updates:
     open-pull-requests-limit: 5
 
   # Enable version updates for GitHub Actions
-    labels: []
+    labels: ["dependencies"]
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5 
-    labels: []
+    labels: ["dependencies"]
