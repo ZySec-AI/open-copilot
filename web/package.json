@@ -68,7 +68,7 @@
         "react-modal": "^3.16.1",
         "react-quill": "^2.0.0",
         "react-redux": "^9.1.2",
-        "react-resizable-panels": "^2.0.19",
+        "react-resizable-panels": "^4.13.3",
         "react-router-dom": "^6.23.1",
         "react-select": "^5.8.0",
         "react-slick": "^0.30.2",
